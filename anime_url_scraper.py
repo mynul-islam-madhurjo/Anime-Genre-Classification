@@ -3,51 +3,64 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import pandas as pd
 import json
+import requests
 
+def is_valid_url(url):
+    try:
+        response = requests.get(url)
+        return response.status_code == 200
+    except requests.RequestException:
+        return False
 
 def scrape_page(url):
-    options = Options()
-    options.add_argument('--headless')
-    driver = webdriver.Chrome(options=options)
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    anime_listings = soup.find_all('tr', class_='ranking-list')
+    try:
 
-    # Initialize lists for data extraction
-    ranks = []
-    titles = []
-    urls = []
+        if not is_valid_url(url):
+            print(f"Ignoring invalid URL: {url}")
+            return None
 
-    for anime_listing in anime_listings:
-        # Extract data from each anime listing
-        rank_element = anime_listing.find('td', class_='rank').find('span', class_='lightLink')
-        rank = rank_element.text.strip() if rank_element else None
-        ranks.append(rank)
+        options = Options()
+        options.add_argument('--headless')
+        driver = webdriver.Chrome(options=options)
+        driver.get(url)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        anime_listings = soup.find_all('tr', class_='ranking-list')
 
-        title_element = anime_listing.find('h3', class_='anime_ranking_h3').find('a')
-        title = title_element.text.strip() if title_element else None
-        titles.append(title)
+        # Initialize lists for data extraction
+        ranks = []
+        titles = []
+        urls = []
 
-        url = title_element['href'] if title_element else None
-        urls.append(url)
+        for anime_listing in anime_listings:
+            # Extract data from each anime listing
+            rank_element = anime_listing.find('td', class_='rank').find('span', class_='lightLink')
+            rank = rank_element.text.strip() if rank_element else None
+            ranks.append(rank)
 
-    driver.quit()
+            title_element = anime_listing.find('h3', class_='anime_ranking_h3').find('a')
+            title = title_element.text.strip() if title_element else None
+            titles.append(title)
 
-    return ranks, titles, urls
+            url = title_element['href'] if title_element else None
+            urls.append(url)
 
+        driver.quit()
 
+        return ranks, titles, urls
+
+    except Exception as e:
+        print(f"Error scraping details for {url}: {e}")
+        return None
 
 def main():
     try:
         base_url = 'https://myanimelist.net/topanime.php?limit='
-        page_number = 0
+        page_number = 9150
         data_list = []
 
         while True:
             url = f'{base_url}{page_number}'
-
             ranks, titles, urls = scrape_page(url)
-
             if not ranks:
                 print(f"No more listings found on page {page_number}. Exiting loop.")
                 break
@@ -67,7 +80,7 @@ def main():
         if data_list:
             final_data = {key: sum([d.get(key, []) for d in data_list], []) for key in data_list[0].keys()}
             df = pd.DataFrame(final_data)
-            df.to_csv('Data/anime_multipage_details.csv', index=False)
+            df.to_csv('Data/anime_multipage_details_more.csv', index=False)
         else:
             print("No data collected. Something went wrong.")
 
