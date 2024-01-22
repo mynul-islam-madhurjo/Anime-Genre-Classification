@@ -18,7 +18,7 @@ Initially there were *74* different genres in the dataset. After some analysis, 
 
 ## Model Training
 
-Finetuned a `distilrobera-base` model from HuggingFace Transformers using Fastai and Blurr. The model training notebook can be viewed [here](anime_multilabel_text_classification.ipynb)
+Finetuned a `distilrobera-base` model from HuggingFace Transformers using Fastai and Blurr. The model training notebook can be viewed [here](https://github.com/mynul-islam-madhurjo/Anime-Genre-Classification/blob/main/Notebooks/anime_multilabel_text_classification.ipynb) 
 
 ## Model Compression and ONNX Inference
 
@@ -26,7 +26,7 @@ The trained model has a memory of 300+MB. I compressed this model using ONNX qua
 
 ## Model Deployment
 
-The compressed model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in `deployment` folder or [here] ()
+The compressed model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in `deployment` folder or [here] (https://github.com/mynul-islam-madhurjo/Anime-Genre-Classification/tree/main/Deployment)[Live URL](https://huggingface.co/spaces/mynul-islam-madhurjo/Anime-Genre-Classifier)
 
-<img src = "Deployment/gradio_app.PNG" width="800" height="400">
+<img src = "Deployment/gradio_app.png" width="800" height="400">
 
