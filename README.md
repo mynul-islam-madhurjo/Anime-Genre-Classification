@@ -30,3 +30,9 @@ The compressed model is deployed to HuggingFace Spaces Gradio App. The implement
 
 <img src = "Deployment/gradio_app.png" width="800" height="400">
 
+## Web Deployment
+Deployed a Flask App built to take description and show the genres as output. Check `live ` branch. The website is live [here](https://anime-genre-classification.onrender.com) 
+
+<img src = "Deployment/flask_app_home.png" width="800" height="400">
+<img src = "Deployment/flask_app_results.png" width="800" height="400">
+
