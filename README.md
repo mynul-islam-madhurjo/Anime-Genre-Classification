@@ -26,7 +26,7 @@ The trained model has a memory of 300+MB. I compressed this model using ONNX qua
 
 ## Model Deployment
 
-The compressed model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in `deployment` folder or [here] (https://github.com/mynul-islam-madhurjo/Anime-Genre-Classification/tree/main/Deployment)[Live URL](https://huggingface.co/spaces/mynul-islam-madhurjo/Anime-Genre-Classifier)
+The compressed model is deployed to HuggingFace Spaces Gradio App. The implementation can be found in `deployment` folder or [here](https://huggingface.co/spaces/mynul-islam-madhurjo/Anime-Genre-Classifier)
 
 <img src = "Deployment/gradio_app.png" width="800" height="400">
 
