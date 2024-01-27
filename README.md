@@ -1,4 +1,4 @@
-# MultiLabel-Anime-Genre-Classifier
+# Anime-Genre-Classification
 
 A text classification model from data collection, model training, and deployment. <br/>
 The model can classify 50 different types of anime genres <br/>The keys of `Deployment\genre_types_encoded.json` shows the anime genres
