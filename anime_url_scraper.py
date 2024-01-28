@@ -55,7 +55,7 @@ def scrape_page(url):
 def main():
     try:
         base_url = 'https://myanimelist.net/topanime.php?limit='
-        page_number = 9150
+        page_number = 0
         data_list = []
 
         while True:
